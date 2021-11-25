@@ -5,12 +5,24 @@ import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { navbarItems } from './NavbarItems';
+import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+import PeopleIcon from '@mui/icons-material/People';
+import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
+import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
+
+import Home from '../pages/Home';
+import Trainings from '../pages/Trainings';
+import Customers from '../pages/Customers';
+
+import {
+	Routes,
+	Route,
+} from 'react-router-dom'
 
 const drawerWidth = 240;
 
@@ -66,9 +78,8 @@ function Navbar() {
     };
 
     return (
-        <div>
         <Box sx={{ display: 'flex '}}>
-        <AppBar position="absolute" open={open}>
+        <AppBar position="fixed" open={open}>
           <Toolbar
             sx={{
               pr: '24px', // keep right padding when drawer closed
@@ -86,17 +97,9 @@ function Navbar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Home
-            </Typography>
           </Toolbar>
         </AppBar>
+
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -111,10 +114,47 @@ function Navbar() {
             </IconButton>
           </Toolbar>
           <Divider />
-          <List>{navbarItems}</List>
+          <List sx={{ ...(!open && { display: 'none' })}}>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+            <ListItem button>
+                  <ListItemIcon>
+                      <HomeIcon sx= {{
+                              paddingRight: '16px',
+                          }} />
+                          <ListItemText primary="Home" />
+                  </ListItemIcon>
+              </ListItem>
+              </Link>
+              <Link to="/customers" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                  <ListItemIcon>
+                      <PeopleIcon sx= {{
+                              paddingRight: '16px',
+                          }} />
+                          <ListItemText primary="Customers" />
+                  </ListItemIcon>
+              </ListItem>
+              </Link>
+              <Link to="/trainings" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                  <ListItemIcon>
+                      <CalendarViewDayIcon sx= {{
+                              paddingRight: '16px',
+                          }} />
+                      <ListItemText primary="Trainings" />
+                  </ListItemIcon>
+              </ListItem>
+              </Link>
+          </List>
         </Drawer>
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/trainings" element={<Trainings />} />
+          </Routes>
         </Box>
-    </div>
+    </Box>
     )
 }
 

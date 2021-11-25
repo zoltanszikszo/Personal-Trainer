@@ -3,9 +3,7 @@ import ListTrainings from '../components/ListTraingings'
 
 function Trainings() {
     return (
-        <div>
-            <ListTrainings />
-        </div>
+        <ListTrainings />
     )
 }
 

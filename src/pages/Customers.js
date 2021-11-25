@@ -3,9 +3,7 @@ import ListCustomers from '../components/ListCustomers';
 
 function Customers() {
     return (
-        <div>
-            <ListCustomers />
-        </div>
+        <ListCustomers />
     )
 }
 

@@ -29,8 +29,8 @@ const columns = [
 ]
 
     return (
-        <div style={{marginTop: 20}}>
-            <div className="ag-theme-material" style={{ marginTop: 20, height: 600, width: '90%', margin: 'auto' }}>
+        <div style= {{ marginTop: 80 }}>
+            <div className="ag-theme-material" style={{ height: 800, width: '90%', margin: 'auto' }}>
             <AgGridReact
                 rowData={trainings}
                 columnDefs={columns}
