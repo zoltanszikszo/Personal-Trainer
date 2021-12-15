@@ -12,12 +12,14 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
-import CalendarViewDayIcon from '@mui/icons-material/CalendarViewDay';
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 import Home from '../pages/Home';
 import Trainings from '../pages/Trainings';
 import Customers from '../pages/Customers';
+import Calendar from './Calendar';
 
 import {
 	Routes,
@@ -138,10 +140,20 @@ function Navbar() {
               <Link to="/trainings" style={{ textDecoration: 'none' }}>
               <ListItem button>
                   <ListItemIcon>
-                      <CalendarViewDayIcon sx= {{
+                      <FitnessCenterIcon sx= {{
                               paddingRight: '16px',
                           }} />
                       <ListItemText primary="Trainings" />
+                  </ListItemIcon>
+              </ListItem>
+              </Link>
+              <Link to="/calendar" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                  <ListItemIcon>
+                      <CalendarTodayIcon sx= {{
+                              paddingRight: '16px',
+                          }} />
+                      <ListItemText primary="Calendar" />
                   </ListItemIcon>
               </ListItem>
               </Link>
@@ -152,6 +164,7 @@ function Navbar() {
             <Route path="/" element={<Home />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/trainings" element={<Trainings />} />
+            <Route path="/calendar" element={<Calendar />} />
           </Routes>
         </Box>
     </Box>

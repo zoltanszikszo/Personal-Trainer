@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { CSVLink } from 'react-csv'
 import { AgGridReact } from 'ag-grid-react'
 import Button from '@mui/material/Button'
 import Snackbar from '@mui/material/Snackbar'
@@ -143,9 +144,17 @@ const columns = [
     },
 ]
 
+    const headers = columns.map(column => column.field)
+    headers.splice(7, 9)
+
     return (
         <div style={{ marginTop: 80 }}>
             <AddCustomer addCustomer={addCustomer} stlye={{ marginTop: 20, marginBottom: 20 }} />
+            <Button variant="contained" size="medium" >
+              <CSVLink data={customers} filename="customerlist" headers={headers} style={{ textDecoration: 'none', color: '#FFFFFF' }}>
+                Download Customers
+              </CSVLink>
+            </Button>
             <div className="ag-theme-material" style={{ height: 800, width: '90%', margin: 'auto' }}>
             <AgGridReact
                 rowData={customers}
