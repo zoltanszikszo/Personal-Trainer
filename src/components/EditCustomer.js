@@ -20,6 +20,7 @@ const EditCustomer = (props) => {
 
   const handleClickOpen = () => {
     console.log(props.row)
+    console.log(props.row.value[0].href)
     setCustomer({
       firstname: props.row.data.firstname,
       lastname: props.row.data.lastname,
@@ -41,7 +42,7 @@ const EditCustomer = (props) => {
   }
 
   const handleSave = () => {
-    props.editCustomer(props.row.value, customer)
+    props.editCustomer(props.row.value[1].href, customer)
     handleClose()
     setCustomer({
       firstname: '',
@@ -56,7 +57,7 @@ const EditCustomer = (props) => {
 
   return (
     <div>
-      <Button size='small' onClick={handleClickOpen}>
+      <Button size='medium' variant="contained" onClick={handleClickOpen}>
         Edit
       </Button>
       <Dialog open={open} onClose={handleClose}>
@@ -128,7 +129,7 @@ const EditCustomer = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleSave}>Add</Button>
+          <Button onClick={handleSave}>Edit</Button>
         </DialogActions>
       </Dialog>
     </div>

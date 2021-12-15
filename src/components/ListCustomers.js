@@ -6,6 +6,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-material.css'
 import EditCustomer from './EditCustomer'
 import AddCustomer from './AddCustomer'
+import AddTraining from './AddTraining'
 
 const ListCustomers = () => {
     const [customers, setCustomers] = useState([]);
@@ -47,13 +48,32 @@ const addCustomer = customer => {
         .catch(error => console.error(error))
 }
 
-const editCustomer = customer => {
-    fetch('https://customerrest.herokuapp.com/api/customers/{id}', {
+const addTraining = training => {
+  fetch('https://customerrest.herokuapp.com/api/trainings', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(training)
+  })
+    .then(res => {
+      if(res.ok) {
+        setMsg('Training added')
+        setOpen(true)
+      } else {
+        alert('Error')
+      }
+    })  
+    .catch(error => console.error(error))
+}
+
+const editCustomer = (url, updateCustomer) => {
+    fetch(url, {
         method: 'PUT',
         headers: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify(customer)
+        body: JSON.stringify(updateCustomer)
     })
     .then(response => {
         if (response.ok){
@@ -67,9 +87,9 @@ const editCustomer = customer => {
     .catch(error => console.error(error));
 }
 
-const deleteCustomer = () => {
+const deleteCustomer = (url) => {
     if (window.confirm('Confirm delete?')) {
-      fetch('https://customerrest.herokuapp.com/api/customers/{id}', { method: 'DELETE' })
+      fetch(url, { method: 'DELETE' })
         .then(response => {
           if (response.ok) {
             setMsg('Customer deleted')
@@ -92,11 +112,19 @@ const columns = [
     { field: 'email', headerName: 'Email', sortable: true, filter: true, width: 200 },
     { field: 'phone', headerName: 'Phone', sortable: true, filter: true, width: 200 },
     {
+      headerName: '',
+      sortable: false,
+      filter: false,
+      width: 200,
+      field: 'links',
+      cellRendererFramework: (params) => <AddTraining row={params} addTraining={addTraining} />
+    },
+    {
         headerName: '',
         sortable: false,
         filter: false,
         width: 120,
-        field: '_links.self.href',
+        field: 'links',
         cellRendererFramework: (params) => <EditCustomer row={params} editCustomer={editCustomer} />
       },
       {
@@ -104,11 +132,13 @@ const columns = [
         sortable: false,
         filter: false,
         width: 120,
-        field: '_links.self.href',
+        field: 'links',
         cellRendererFramework: (params) => (
           <Button
             color='error'
-            onClick={() => deleteCustomer(params.value)}>Delete</Button>
+            variant='contained'
+            size='medium'
+            onClick={() => deleteCustomer(params.data.links[0].href)}>Delete</Button>
         )
     },
 ]

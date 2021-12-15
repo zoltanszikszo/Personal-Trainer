@@ -46,8 +46,8 @@ const AddCustomer = (props) => {
 
   return (
     <div>
-      <Button size='small' onClick={handleClickOpen}>
-        Add
+      <Button size='medium' variant="contained" sx={{ marginBottom: 5 }} onClick={handleClickOpen}>
+        Add Customer
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add Customer</DialogTitle>
