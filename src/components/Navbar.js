@@ -14,12 +14,14 @@ import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import BarChartIcon from '@mui/icons-material/BarChart';
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 import Home from '../pages/Home';
 import Trainings from '../pages/Trainings';
 import Customers from '../pages/Customers';
-import Calendar from './Calendar';
+import Calendar from '../pages/Calendar';
+import Stat from '../pages/Stat';
 
 import {
 	Routes,
@@ -157,6 +159,16 @@ function Navbar() {
                   </ListItemIcon>
               </ListItem>
               </Link>
+              <Link to="/stat" style={{ textDecoration: 'none' }}>
+              <ListItem button>
+                  <ListItemIcon>
+                      <BarChartIcon sx= {{
+                              paddingRight: '16px',
+                          }} />
+                      <ListItemText primary="Statistics" />
+                  </ListItemIcon>
+              </ListItem>
+              </Link>
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -165,6 +177,7 @@ function Navbar() {
             <Route path="/customers" element={<Customers />} />
             <Route path="/trainings" element={<Trainings />} />
             <Route path="/calendar" element={<Calendar />} />
+            <Route path="/stat" element={<Stat />} />
           </Routes>
         </Box>
     </Box>
